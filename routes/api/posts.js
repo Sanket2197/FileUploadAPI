@@ -3,10 +3,11 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
 const Post = require("../../models/Post");
 const multer = require("multer");
+const fileUploadPath = "./client/src/static/uploads";
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, fileUploadPath);
   },
   filename: function(req, file, cb) {
     cb(null, file.originalname);
@@ -64,5 +65,18 @@ router.post(
     }
   }
 );
+
+// @route    GET api/posts
+// @desc     Get all posts
+// @access   Private
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ date: -1 });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
