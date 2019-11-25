@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://sanket:root@fileupload-2e0yw.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "",
   "jwtSecret": "secret",
   "githubClientId": "",
   "githubSecret": ""
